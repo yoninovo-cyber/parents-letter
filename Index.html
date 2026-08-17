@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פתיחת שנת הלימודים תשפ"ז | אמי"ת חצור הגלילית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Suez+One&family=Assistant:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#331E79;
+    --ink-soft:#4B3A82;
+    --body-text:#3A3350;
+    --magenta:#B82F96;
+    --azure:#2A7FC9;
+    --sky:#6FD3F5;
+    --leaf:#3FA23A;
+    --gold:#DA9F2E;
+    --paper:#FAF6EC;
+    --paper-alt:#F1EBD9;
+    --line: rgba(51,30,121,.14);
+    --white:#FFFDF8;
+    --max: 780px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--body-text);
+    font-family:'Assistant', sans-serif;
+    line-height:1.75;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Suez One', serif;
+    color:var(--ink);
+    font-weight:400;
+    line-height:1.3;
+    margin:0;
+  }
+  .util{font-family:'Heebo',sans-serif;}
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  .prose{max-width:var(--max);}
+
+  /* ---------- nav ---------- */
+  .nav-shell{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,246,236,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .progress{
+    position:absolute; bottom:-1px; right:0; height:2px;
+    background:linear-gradient(to left, var(--magenta), var(--azure), var(--leaf), var(--gold));
+    width:0%;
+    transition:width .1s linear;
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:12px 24px; max-width:1040px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Suez One',serif; color:var(--ink); font-size:16px; white-space:nowrap;
+  }
+  .brand .mini-petal{width:26px;height:26px;flex:none;}
+  .nav-links{
+    display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{
+    font-family:'Heebo',sans-serif; font-size:14px; font-weight:600;
+    text-decoration:none; color:var(--ink-soft);
+    padding:8px 12px; border-radius:100px; white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active{ background:var(--ink); color:var(--white); }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; padding:64px 0 40px; overflow:hidden; }
+  .bh{
+    font-family:'Heebo',sans-serif; font-size:13px; font-weight:700;
+    color:var(--ink-soft); letter-spacing:.04em; margin-bottom:18px;
+  }
+  .hero-grid{ display:grid; grid-template-columns:1fr auto; gap:40px; align-items:start; }
+  @media (max-width:720px){ .hero-grid{grid-template-columns:1fr;} .petal-hero{margin:0 auto;} }
+  .eyebrow{
+    font-family:'Heebo',sans-serif; font-weight:700; font-size:13px;
+    color:var(--magenta); letter-spacing:.06em; margin-bottom:10px; display:block;
+  }
+  h1.hero-title{ font-size:clamp(34px,5.2vw,54px); margin-bottom:6px;}
+  .hero-sub{
+    font-size:18px; color:var(--ink-soft); margin-bottom:28px; font-weight:600;
+  }
+  .letter-quote{
+    font-family:'Heebo',sans-serif; font-size:14px; color:var(--ink-soft);
+    border-inline-start:3px solid var(--gold); padding-inline-start:14px; margin-bottom:26px;
+  }
+  .hero-text p{ font-size:17px; }
+  .hero-text strong{color:var(--ink);}
+
+  /* signature flower: radial placement is a static SVG attribute on each
+     petal's wrapper <g>; the CSS animation only scales/fades the petal
+     itself from its own base, so the two transforms never fight. */
+  .petal-hero{ width:190px; height:190px; }
+  @keyframes bloom{ from{ transform:scale(.15); opacity:0;} to{ transform:scale(1); opacity:1;} }
+  .petal-hero .petal{
+    transform-box:fill-box; transform-origin:center bottom;
+    animation:bloom .9s cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  /* stem divider = "root line": stable element between moving content */
+  .root-divider{ display:flex; align-items:center; gap:10px; margin:56px 0 40px; }
+  .root-divider .line{flex:1; height:1px; background:var(--line);}
+  .root-divider .stem-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
+
+  section{ padding:8px 0 48px; }
+  .section-head{ max-width:var(--max); margin-bottom:28px; }
+  .section-head h2{ font-size:clamp(24px,3.4vw,32px); }
+  .section-head p{ color:var(--ink-soft); font-size:15.5px; margin-top:6px;}
+
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- values ---------- */
+  .values-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:720px){ .values-grid{grid-template-columns:1fr;} }
+  .value-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden;
+  }
+  .value-card .accent{ height:5px; }
+  .value-btn{
+    width:100%; text-align:right; background:none; border:0; cursor:pointer;
+    padding:20px 20px 18px; font-family:inherit; color:inherit;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .value-btn h3{ font-size:19px; }
+  .value-btn .num{ font-family:'Heebo',sans-serif; font-size:12px; color:var(--ink-soft); font-weight:700;}
+  .value-btn .plus{
+    flex:none; width:26px; height:26px; border-radius:50%; border:1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:15px; color:var(--ink);
+    transition:transform .3s ease;
+  }
+  .value-card[data-open="true"] .plus{ transform:rotate(45deg); }
+  .value-panel{
+    max-height:0; overflow:hidden; transition:max-height .4s ease;
+  }
+  .value-panel-inner{ padding:0 20px 22px; font-size:15.5px; color:var(--body-text); }
+
+  /* ---------- expectations ---------- */
+  .panel{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:22px 22px; margin-bottom:16px; max-width:var(--max);
+  }
+  .panel h3{ font-size:18px; margin-bottom:10px; display:flex; align-items:center; gap:10px;}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .toggle-row{ display:flex; gap:8px; margin-bottom:16px; }
+  .toggle-btn{
+    font-family:'Heebo',sans-serif; font-weight:700; font-size:14px;
+    padding:8px 18px; border-radius:100px; border:1.5px solid var(--line);
+    background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .2s;
+  }
+  .toggle-btn.active{ background:var(--ink); color:var(--white); border-color:var(--ink); }
+  .dress-view{ display:none; }
+  .dress-view.show{ display:block; }
+  ul.clean{ margin:0; padding-inline-start:20px; }
+  ul.clean li{ margin-bottom:8px; }
+  .warn-note{
+    margin-top:14px; background:#FBF1DC; border:1px solid rgba(218,159,46,.4);
+    border-radius:10px; padding:14px 16px; font-size:14.5px; color:#5c4110;
+  }
+
+  /* ---------- participation ---------- */
+  .grade-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .grade-tab{
+    font-family:'Heebo',sans-serif; font-weight:700; font-size:15px;
+    width:46px; height:46px; border-radius:50%; border:1.5px solid var(--line);
+    background:var(--white); color:var(--ink); cursor:pointer; transition:all .2s;
+  }
+  .grade-tab.active{ background:var(--magenta); border-color:var(--magenta); color:var(--white); }
+  .cost-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px; padding:22px; max-width:var(--max);
+  }
+  .cost-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--line); font-size:15px;}
+  .cost-row span:first-child{ color:var(--body-text); }
+  .cost-row span:last-child{ font-family:'Heebo',sans-serif; font-weight:600; color:var(--ink); }
+  .cost-row.total{ border-bottom:0; margin-top:6px; padding-top:16px; border-top:2px solid var(--ink); }
+  .cost-row.total span{ font-size:18px; font-weight:800; color:var(--magenta); font-family:'Heebo',sans-serif;}
+  details.compare{ max-width:var(--max); margin-top:18px; }
+  details.compare summary{
+    cursor:pointer; font-family:'Heebo',sans-serif; font-weight:700; font-size:14px;
+    color:var(--azure); list-style:none;
+  }
+  details.compare summary::-webkit-details-marker{display:none;}
+  table.cmp{ width:100%; border-collapse:collapse; margin-top:14px; font-size:13.5px; font-family:'Heebo',sans-serif;}
+  table.cmp th, table.cmp td{ border:1px solid var(--line); padding:7px 6px; text-align:center; }
+  table.cmp th{ background:var(--paper-alt); }
+  table.cmp td:first-child, table.cmp th:first-child{ text-align:right; font-weight:600;}
+
+  .dates-table{ width:100%; max-width:var(--max); border-collapse:collapse; margin-top:6px; font-size:14.5px;}
+  .dates-table th{ font-family:'Heebo',sans-serif; font-size:13px; color:var(--ink-soft); text-align:right; padding:8px 6px; border-bottom:2px solid var(--ink);}
+  .dates-table td{ padding:10px 6px; border-bottom:1px solid var(--line); }
+  .book-note{
+    max-width:var(--max); margin-top:18px; background:var(--paper-alt); border-radius:12px;
+    padding:16px 18px; font-size:14.5px; border-inline-start:3px solid var(--leaf);
+  }
+
+  /* ---------- schedule ---------- */
+  .pre-term-list{ max-width:var(--max); }
+  .pt-item{ display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .pt-day{ font-family:'Suez One',serif; font-size:15px; color:var(--ink); width:74px; flex:none; }
+  .pt-date{ font-family:'Heebo',sans-serif; font-size:13px; color:var(--ink-soft); width:78px; flex:none;}
+  .pt-hours{ margin-inline-start:auto; font-family:'Heebo',sans-serif; font-size:13.5px; font-weight:700;
+    background:var(--paper-alt); padding:5px 12px; border-radius:100px; color:var(--ink);}
+
+  .timeline{ max-width:var(--max); position:relative; padding-inline-start:22px; }
+  .timeline::before{ content:""; position:absolute; inset-inline-start:6px; top:4px; bottom:4px; width:2px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:20px; }
+  .tl-item::before{
+    content:""; position:absolute; inset-inline-start:-22px; top:3px; width:11px; height:11px;
+    border-radius:50%; background:var(--white); border:2px solid var(--magenta);
+  }
+  .tl-time{ font-family:'Heebo',sans-serif; font-size:13px; font-weight:700; color:var(--magenta); }
+  .tl-label{ font-size:15.5px; }
+
+  footer{
+    background:var(--ink); color:var(--white); padding:44px 0 28px; margin-top:24px;
+  }
+  footer .wrap{ max-width:780px; }
+  footer h3{ color:var(--white); font-size:22px; margin-bottom:10px;}
+  footer p{ color:#D8D0F0; font-size:15px; }
+  footer .tagline{ font-family:'Suez One',serif; font-size:15px; color:var(--sky); margin-top:22px; }
+  footer .credit{ font-family:'Heebo',sans-serif; font-size:12px; color:#9186BE; margin-top:26px; }
+</style>
+</head>
+<body>
+
+<div class="nav-shell">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg class="mini-petal" viewBox="0 0 100 100"><g>
+        <ellipse cx="50" cy="30" rx="10" ry="24" fill="#6FD3F5" transform="rotate(-25 50 50)"/>
+        <ellipse cx="50" cy="30" rx="10" ry="24" fill="#2A7FC9" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="30" rx="10" ry="24" fill="#331E79" transform="rotate(25 50 50)"/>
+        <ellipse cx="50" cy="30" rx="9" ry="20" fill="#B82F96" transform="rotate(48 50 50)"/>
+        <ellipse cx="50" cy="34" rx="9" ry="20" fill="#3FA23A" transform="rotate(-48 50 50)"/>
+      </g></svg>
+      אמי"ת חצור הגלילית
+    </div>
+    <nav class="nav-links">
+      <a href="#hero" class="active">פתיחה</a>
+      <a href="#values">ערכים</a>
+      <a href="#expectations">תיאום ציפיות</a>
+      <a href="#participation">השתתפות הורים</a>
+      <a href="#schedule">לו"ז</a>
+    </nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</div>
+
+<main class="wrap">
+
+  <section class="hero" id="hero">
+    <div class="bh">ב"ה</div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">מכתב פתיחת שנה · תשפ"ז</span>
+        <h1 class="hero-title">הורים יקרים ואהובים,<br>ה' עימכם</h1>
+        <div class="hero-sub">בית חינוך אמי"ת חצור הגלילית</div>
+
+        <div class="hero-text prose">
+          <p>בפרשת השבוע שקראנו לפני שבוע, קראנו על סימן הטהרה של הדג – כל דג שיש לו קשקשת וסנפיר כשר למאכל. מלמדים אותנו חז"ל שבדרך הטבע כל דג שיש לו קשקשת יש לו גם סנפיר. שואלים חז"ל: אם כך, מדוע לא לכתוב שכל דג שיש לו קשקשת כשר? (הרי אם יש קשקשת יש סנפיר).</p>
+          <p><strong>הקשקשת מבטאת את הדבר הקבוע – היציב, ואילו הסנפיר מבטא את התנועה והשינוי.</strong> כשיש את הדברים הקבועים יש אפשרות להיות בתנועה גם לדברים המשתנים. היכולת ליצור שינוי היא על בסיס עוגנים ודברים קבועים שלא ניתנים לשינוי.</p>
+          <p>אנו משתדלים בבית החינוך להתחדש בכל שנה על בסיס הערכים הקבועים שנותנים לנו עוגן ויציבות – להמשיך להכות שורשים בארבעת ערכי בית החינוך, ולצד זה להיות ערים לצרכים שמתעוררים ולאפשר למידה מותאמת. בע"ה, במהלך השנה הקרובה נשתדל לעלות קומה נוספת בארבעת הערכים.</p>
+        </div>
+      </div>
+
+      <svg class="petal-hero" viewBox="0 0 200 200">
+        <g transform="translate(100,110)">
+          <g transform="rotate(-32)"><ellipse class="petal" style="animation-delay:.05s" cx="0" cy="-55" rx="20" ry="52" fill="#6FD3F5"/></g>
+          <g transform="rotate(-11)"><ellipse class="petal" style="animation-delay:.15s" cx="0" cy="-58" rx="20" ry="55" fill="#2A7FC9"/></g>
+          <g transform="rotate(12)"><ellipse class="petal" style="animation-delay:.25s" cx="0" cy="-58" rx="20" ry="55" fill="#331E79"/></g>
+          <g transform="rotate(38)"><ellipse class="petal" style="animation-delay:.35s" cx="0" cy="-50" rx="18" ry="46" fill="#B82F96"/></g>
+          <g transform="rotate(-52)"><ellipse class="petal" style="animation-delay:.45s" cx="0" cy="-46" rx="17" ry="42" fill="#3FA23A"/></g>
+          <g transform="rotate(58)"><path class="petal" style="animation-delay:.55s" d="M0,0 Q14,-18 30,-14 Q16,-2 0,0 Z" fill="#DA9F2E"/></g>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <div class="root-divider"><span class="line"></span><span class="stem-dot"></span><span class="line"></span></div>
+
+  <section id="values">
+    <div class="section-head reveal">
+      <h2>ארבעת ערכי בית החינוך</h2>
+      <p>עוגן קבוע שממנו יוצאים לתנועה ולשינוי בשנה שלפנינו. לחצו על כל ערך להרחבה.</p>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card reveal" data-open="false">
+        <div class="accent" style="background:var(--gold)"></div>
+        <button class="value-btn" data-toggle>
+          <div><span class="num">01</span><h3>תורת חיים</h3></div>
+          <span class="plus">+</span>
+        </button>
+        <div class="value-panel">
+          <div class="value-panel-inner">אנחנו בתהליכי מינוי רב לבית החינוך. בע"ה בימים הקרובים ימונה רב אשר יוביל תוכנית להעמקת הזהות היהודית, לימוד ואהבת התורה. יוקם בית מדרש עם שיעורים מגוונים, והתלמידים ייחשפו לישיבות ורבנים בולטים – מתוך רצון להגדיל תורה ולהאדירה.</div>
+        </div>
+      </div>
+
+      <div class="value-card reveal" data-open="false">
+        <div class="accent" style="background:var(--azure)"></div>
+        <button class="value-btn" data-toggle>
+          <div><span class="num">02</span><h3>מיצוי ומצוינות</h3></div>
+          <span class="plus">+</span>
+        </button>
+        <div class="value-panel">
+          <div class="value-panel-inner">ב"ה, הישגי בית החינוך מהגבוהים בסביבה – הן באחוזי הבגרות והן באיכות התעודה. לפני שנתיים הוטמעה תפיסת השלם של רשת אמי"ת, הכוללת את שערי הלמידה: שער מפגש, שער עצמאות ושער גילוי. בשנה הבאה נעמיק ונתרחב לכל חטיבת הביניים. בחטיבה העליונה, לצד המגמות הקיימות – פיזיקה, מחשבים, ביולוגיה, כלכלה ותקשוב – תיפתח מגמת תחבורה מתקדמת שתשתלב עם נבחרות המייקרים.</div>
+        </div>
+      </div>
+
+      <div class="value-card reveal" data-open="false">
+        <div class="accent" style="background:var(--leaf)"></div>
+        <button class="value-btn" data-toggle>
+          <div><span class="num">03</span><h3>חברתי ערכי</h3></div>
+          <span class="plus">+</span>
+        </button>
+        <div class="value-panel">
+          <div class="value-panel-inner">לאחר מספר שנים שהטמענו את מודל ההעצמות הכיתתיות – קלמרים, מל"ח הארץ, ימיה וצלילה – בשנה הבאה נוסיף העצמה נוספת לפיתוח חוסן דרך גלישת גלים בים התיכון. בנוסף נעמיק את מודל הנבחרות: בנתיב הבנות ייפתחו 4 נבחרות – אקו רפואה, ציור, תיאטרון ומייקרים. בנתיב הבנים מסתמן שייפתחו נבחרות אופניים, שדאות, מייקרים וכדורסל, ובהמשך יתווספו עוד 2 נבחרות.</div>
+        </div>
+      </div>
+
+      <div class="value-card reveal" data-open="false">
+        <div class="accent" style="background:var(--magenta)"></div>
+        <button class="value-btn" data-toggle>
+          <div><span class="num">04</span><h3>משפחתיות</h3></div>
+          <span class="plus">+</span>
+        </button>
+        <div class="value-panel">
+          <div class="value-panel-inner">אנו מחזקים בבית החינוך את ערך הקהילתיות והמשפחתיות. אנו מאמינים שילד שטוב לו הוא ילד שיצליח להתפתח ולהגשים חלומות. גם השנה נמשיך להעמיק בתוכנית התצא"מ – תוכנית צמיחה אישית-מקצועית – לצד יצירת אקלים משפחתי ותחושת מוגנות.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="root-divider"><span class="line"></span><span class="stem-dot"></span><span class="line"></span></div>
+
+  <section id="expectations">
+    <div class="section-head reveal">
+      <h2>תיאום ציפיות</h2>
+      <p>כמה דברים חשוב שנהיה מתואמים עליהם יחד, מתוך אהבה לתלמידים.</p>
+    </div>
+
+    <div class="panel reveal">
+      <h3><span class="dot" style="background:var(--azure)"></span>נוכחות והגעה בזמן לתפילה</h3>
+      <p style="margin:0">אנו מבקשים להקפיד על הגעה בזמן לבית החינוך, ובוודאי לא להחסיר ימים שלמים. אנו מבקשים מכם ההורים לשלב איתנו זרועות ולוודא שהבן/בת מתמידים בהגעה – לא ניתן לקיים תהליך משמעותי עם תלמיד/ה שנעדר/ת.</p>
+    </div>
+
+    <div class="panel reveal">
+      <h3><span class="dot" style="background:var(--leaf)"></span>כללי הופעה חיצונית</h3>
+      <div class="toggle-row">
+        <button class="toggle-btn active" data-dress="boys">בנים</button>
+        <button class="toggle-btn" data-dress="girls">בנות</button>
+      </div>
+      <div class="dress-view show" data-dress-view="boys">
+        <ul class="clean">
+          <li>חולצת תלבושת עם לוגו "להיות הולך וגדל" (גאוות יחידה ושייכות), כיפה – "כומתה יהודית".</li>
+          <li>מכנס מגיע עד הברכיים, נעליים סגורות או סנדלים (ללא כפכפים). תלמיד שיגיע עם מכנס קצר מהברכיים יחזור הביתה להחליף.</li>
+        </ul>
+      </div>
+      <div class="dress-view" data-dress-view="girls">
+        <ul class="clean">
+          <li>חצאיות מתחת לברך. מי שתגיע עם חצאית קצרה תחזור הביתה באותו יום להחליף.</li>
+          <li>שרוול החולצה – עד מעל המרפק (אגרוף). מי שתגיע עם שרוול קצר יותר תתבקש לחזור הביתה להחליף.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel reveal">
+      <h3><span class="dot" style="background:var(--magenta)"></span>נוהל פלאפונים</h3>
+      <p>בתחילת כל יום מחנכי ומחנכות הכיתות אוספים את הניידים, ומחזירים אותם בסוף היום. הפלאפון מסיח את הדעת, מוריד את רמת הקשב, ומעכב יכולת ליצור אינטראקציה בריאה עם הסביבה. במהלך השנה יובילו מחנכי הכיתות שיח ופעילות סביב הנושא, ואנו מבקשים מכם ההורים להיות שותפים מלאים – מתוך אהבה לתלמידינו.</p>
+      <div class="warn-note">ממליצים לכלל ההורים לרכוש תוכנת הגנה לפלאפונים של הילדים – מחקרים מצביעים על חשיפה אפשרית לתכנים קשים כבר בגיל היסודי. מי שמעוניין/ת, מוזמנ/ת ליצור קשר עם מחנך/ת הכיתה ונשמח לסייע.</div>
+    </div>
+  </section>
+
+  <div class="root-divider"><span class="line"></span><span class="stem-dot"></span><span class="line"></span></div>
+
+  <section id="participation">
+    <div class="section-head reveal">
+      <h2>השתתפות הורים</h2>
+      <p>בחרו את שכבת הגיל של הבן/בת לצפייה בפירוט התשלום.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="grade-tabs" id="gradeTabs">
+        <button class="grade-tab active" data-grade="ז">ז'</button>
+        <button class="grade-tab" data-grade="ח">ח'</button>
+        <button class="grade-tab" data-grade="ט">ט'</button>
+        <button class="grade-tab" data-grade="י">י'</button>
+        <button class="grade-tab" data-grade="יא">יא'</button>
+        <button class="grade-tab" data-grade="יב">יב'</button>
+      </div>
+
+      <div class="cost-card" id="costCard"></div>
+
+      <details class="compare">
+        <summary>הצגת טבלת השוואה לכל השכבות ⌄</summary>
+        <table class="cmp" id="cmpTable"></table>
+      </details>
+
+      <div class="book-note">גם השנה תתקיים "השאלת ספרים" בכל השכבות. תלמידים שישלמו את מלוא סכום התשלום השנתי יוכלו להשתתף בפרויקט ולקבל את כל הספרים בימי החלוקה המסודרים.</div>
+
+      <h3 style="margin-top:32px;font-size:18px;">זמני תשלומי הורים</h3>
+      <table class="dates-table">
+        <thead><tr><th>יום</th><th>תאריך עברי</th><th>תאריך לועזי</th><th>שעות</th></tr></thead>
+        <tbody>
+          <tr><td>שלישי</td><td>יב' אלול</td><td>25.08.26</td><td>09:00–16:00</td></tr>
+          <tr><td>רביעי</td><td>יג' אלול</td><td>26.08.26</td><td>09:00–14:00</td></tr>
+          <tr><td>חמישי</td><td>יד' אלול</td><td>27.08.26</td><td>09:00–13:00</td></tr>
+          <tr><td>ראשון</td><td>יז' אלול</td><td>30.08.26</td><td>09:00–13:00</td></tr>
+          <tr><td>שני</td><td>יח' אלול</td><td>31.08.26</td><td>09:00–13:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="root-divider"><span class="line"></span><span class="stem-dot"></span><span class="line"></span></div>
+
+  <section id="schedule">
+    <div class="section-head reveal">
+      <h2>לו"ז ימי הלימודים הראשונים</h2>
+      <p>אותה מסגרת קבועה, עם תוכן שמתאים לכל נתיב – בדיוק כמו הקשקשת והסנפיר.</p>
+    </div>
+
+    <div class="reveal" style="max-width:var(--max)">
+      <h3 style="font-size:17px;margin-bottom:10px;">ימי היערכות (לוח החלוקה של הספרים)</h3>
+      <div class="pre-term-list">
+        <div class="pt-item"><span class="pt-day">יום שלישי</span><span class="pt-date">25.08.26</span><span class="pt-hours">09:00–16:00</span></div>
+        <div class="pt-item"><span class="pt-day">יום רביעי</span><span class="pt-date">26.08.26</span><span class="pt-hours">09:00–14:00</span></div>
+        <div class="pt-item"><span class="pt-day">יום חמישי</span><span class="pt-date">27.08.26</span><span class="pt-hours">09:00–13:00</span></div>
+        <div class="pt-item"><span class="pt-day">יום ראשון</span><span class="pt-date">30.08.26</span><span class="pt-hours">09:00–13:00</span></div>
+        <div class="pt-item"><span class="pt-day">יום שני</span><span class="pt-date">31.08.26</span><span class="pt-hours">09:00–13:00</span></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:36px;max-width:var(--max)">
+      <h3 style="font-size:17px;margin-bottom:14px;">יום ראשון ללימודים – י"ז אלול, 30.08.26</h3>
+      <div class="toggle-row">
+        <button class="toggle-btn active" data-sched="boys">נתיב בנים</button>
+        <button class="toggle-btn" data-sched="girls">נתיב בנות</button>
+      </div>
+
+      <div class="timeline show" data-sched-view="boys">
+        <div class="tl-item"><div class="tl-time">07:30–08:55</div><div class="tl-label">תפילה + סליחות</div></div>
+        <div class="tl-item"><div class="tl-time">08:55–09:15</div><div class="tl-label">הפסקה</div></div>
+        <div class="tl-item"><div class="tl-time">09:15–10:00</div><div class="tl-label">מפגש מחנך</div></div>
+        <div class="tl-item"><div class="tl-time">10:00–10:30</div><div class="tl-label">הפסקה</div></div>
+        <div class="tl-item"><div class="tl-time">10:30–11:15</div><div class="tl-label">למידה לפי מערכת השעות</div></div>
+        <div class="tl-item"><div class="tl-time">11:15–12:00</div><div class="tl-label">טקס לכלל התלמידים</div></div>
+        <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-label">סיום לימודים</div></div>
+      </div>
+
+      <div class="timeline" data-sched-view="girls" style="display:none">
+        <div class="tl-item"><div class="tl-time">08:00–08:30</div><div class="tl-label">תפילה</div></div>
+        <div class="tl-item"><div class="tl-time">08:30–09:15</div><div class="tl-label">מפגש מחנכת</div></div>
+        <div class="tl-item"><div class="tl-time">09:15–10:00</div><div class="tl-label">טקס לכלל התלמידות</div></div>
+        <div class="tl-item"><div class="tl-time">10:00–10:30</div><div class="tl-label">הפסקה מתוקה</div></div>
+        <div class="tl-item"><div class="tl-time">10:30–11:15</div><div class="tl-label">למידה לפי המערכות</div></div>
+        <div class="tl-item"><div class="tl-time">11:15–12:00</div><div class="tl-label">למידה לפי המערכות</div></div>
+        <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-label">סיום לימודים</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h3>מחכים לשנה מוצלחת ומלאת צמיחה</h3>
+    <p>מי שמעוניין/ת - ניתן ליצור קשר עם מחנך/ת הכיתה, ואנחנו נשמח לסייע.</p>
+    <div class="tagline">"ועשית הישר והטוב בעיני ה'..."</div>
+    <div class="credit">בית חינוך אמי"ת חצור הגלילית · ב"ה</div>
+  </div>
+</footer>
+
+<script>
+// grade payment data (₪), ordered ז'..יב'
+const GRADES = ["ז","ח","ט","י","יא","יב"];
+const GRADE_LABEL = {"ז":"ז'","ח":"ח'","ט":"ט'","י":"י'","יא":"יא'","יב":"יב'"};
+const ROWS = [
+  {label:"ביטוח תאונות", v:[73,73,73,73,73,73]},
+  {label:"ספרי לימוד", v:[280,280,280,320,320,320]},
+  {label:"טיולים (השתתפות במסע שנתי)", v:[387,387,387,513,513,616]},
+  {label:"סל תרבות", v:[135,135,151,162,162,162]},
+  {label:"שבת", v:[340,340,340,340,340,340]},
+  {label:"פעילות תורנית - סיורים והרצאות", v:[330,330,330,300,300,300]},
+  {label:"סמינריון (העצמות לפי שכבות וסיורים)", v:[400,400,400,400,400,400]},
+  {label:'של"ח', v:[null,150,150,150,150,null]},
+  {label:"קרן קרב עם העירייה", v:[250,250,null,null,null,null]},
+  {label:"מסיבות סיום", v:[null,null,null,null,null,null]},
+];
+const TOTALS = [2195,2345,2111,2258,2258,2211];
+const fmt = n => n===null ? "—" : "₪" + n.toLocaleString('en-US');
+
+function renderCost(gradeKey){
+  const idx = GRADES.indexOf(gradeKey);
+  const card = document.getElementById('costCard');
+  let html = `<div style="font-family:'Heebo',sans-serif;font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px;">שכבה ${GRADE_LABEL[gradeKey]}</div>`;
+  ROWS.forEach(r=>{
+    html += `<div class="cost-row"><span>${r.label}</span><span>${fmt(r.v[idx])}</span></div>`;
+  });
+  html += `<div class="cost-row total"><span>סה"כ לתשלום</span><span>${fmt(TOTALS[idx])}</span></div>`;
+  card.innerHTML = html;
+}
+
+function renderCompareTable(){
+  const t = document.getElementById('cmpTable');
+  let head = "<tr><th>סעיף</th>" + GRADES.map(g=>`<th>${GRADE_LABEL[g]}</th>`).join('') + "</tr>";
+  let body = ROWS.map(r => "<tr><td>"+r.label+"</td>" + r.v.map(v=>`<td>${fmt(v)}</td>`).join('') + "</tr>").join('');
+  let foot = "<tr><td><strong>סה\"כ</strong></td>" + TOTALS.map(v=>`<td><strong>${fmt(v)}</strong></td>`).join('') + "</tr>";
+  t.innerHTML = head + body + foot;
+}
+
+document.getElementById('gradeTabs').addEventListener('click', e=>{
+  const btn = e.target.closest('.grade-tab');
+  if(!btn) return;
+  document.querySelectorAll('.grade-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCost(btn.dataset.grade);
+});
+renderCost('ז');
+renderCompareTable();
+
+// values accordion
+document.querySelectorAll('.value-card').forEach(card=>{
+  const btn = card.querySelector('[data-toggle]');
+  const panel = card.querySelector('.value-panel');
+  btn.addEventListener('click', ()=>{
+    const isOpen = card.dataset.open === 'true';
+    // close all
+    document.querySelectorAll('.value-card').forEach(c=>{
+      c.dataset.open = 'false';
+      c.querySelector('.value-panel').style.maxHeight = null;
+    });
+    if(!isOpen){
+      card.dataset.open = 'true';
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+});
+
+// dress code toggle
+document.querySelectorAll('[data-dress]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.closest('.panel');
+    group.querySelectorAll('[data-dress]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    group.querySelectorAll('.dress-view').forEach(v=>v.classList.remove('show'));
+    group.querySelector(`[data-dress-view="${btn.dataset.dress}"]`).classList.add('show');
+  });
+});
+
+// schedule toggle
+document.querySelectorAll('[data-sched]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.parentElement;
+    group.querySelectorAll('[data-sched]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const wrap = group.parentElement;
+    wrap.querySelectorAll('[data-sched-view]').forEach(v=> v.style.display = 'none');
+    wrap.querySelector(`[data-sched-view="${btn.dataset.sched}"]`).style.display = 'block';
+  });
+});
+
+// scroll progress + nav active state
+const sections = ['hero','values','expectations','participation','schedule'].map(id=>document.getElementById(id));
+const navLinks = document.querySelectorAll('.nav-links a');
+function onScroll(){
+  const doc = document.documentElement;
+  const pct = (doc.scrollTop) / (doc.scrollHeight - doc.clientHeight) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+
+  let current = sections[0].id;
+  sections.forEach(s=>{
+    if(window.scrollY + 120 >= s.offsetTop) current = s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+// reveal on scroll
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+  });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
